@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using SudokuLibrary.Services;
 
 namespace SudokuLibrary.Data
@@ -19,11 +20,16 @@ namespace SudokuLibrary.Data
             Valid = true;
             _puzzle = new int[Size,Size];
         }
-        
+
         public void SetNumber(int value, int rowIdx, int colIdx)
         {
             _puzzle[rowIdx, colIdx] = value;
             Validate();
+        }
+
+        public int GetNumber(int rowIdx, int colIdx)
+        {
+            return _puzzle[rowIdx, colIdx];
         }
 
         private void Validate()
@@ -41,7 +47,7 @@ namespace SudokuLibrary.Data
             {
                 row[idx] = _puzzle[index, idx];
             }
-            
+
             return row;
         }
 
@@ -53,10 +59,10 @@ namespace SudokuLibrary.Data
             {
                 column[idx] = _puzzle[idx, index];
             }
-            
+
             return column;
         }
-        
+
         public IEnumerable<int> GetSquare(int index)
         {
             var square = new int[Size];
@@ -79,6 +85,13 @@ namespace SudokuLibrary.Data
             }
 
             return square;
+        }
+
+        public int GetSquareIndex(int rowIdx, int colIdx)
+        {
+            var squareSize = (int) Math.Sqrt(Size);
+
+            return squareSize * (rowIdx / squareSize) + (colIdx / squareSize);
         }
 
         public override string ToString()
