@@ -1,4 +1,6 @@
 # SudokuSolver
+![Build Status](https://travis-ci.org/jamoore5/SudokuSolver.svg?branch=master) [![Maintainability](https://api.codeclimate.com/v1/badges/7254e2d96f80ac8f07f6/maintainability)](https://codeclimate.com/github/jamoore5/SudokuSolver/maintainability)
+  
 Building a C# Sudoku Solver to practice my C# and design skills
 
 ## Inspiration
