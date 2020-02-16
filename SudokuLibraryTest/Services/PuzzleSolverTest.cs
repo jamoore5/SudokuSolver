@@ -8,7 +8,7 @@ namespace SudokuLibraryTest.Services
     public class PuzzleSolverTest
     {
         [Fact]
-        public void PopulatePossibilities_Test()
+        public void Solve_Test()
         {
             var sb = new StringBuilder();
             sb.AppendLine("0 0 0 4");
@@ -26,7 +26,7 @@ namespace SudokuLibraryTest.Services
         }
 
         [Fact]
-        public void PopulatePossibilities_Test2()
+        public void Solve_Test2()
         {
             var sb = new StringBuilder();
             sb.AppendLine("0 2 3 0");
@@ -44,7 +44,7 @@ namespace SudokuLibraryTest.Services
         }
 
         [Fact]
-        public void PopulatePossibilities_Test3()
+        public void Solve_Test3()
         {
             var sb = new StringBuilder();
             sb.AppendLine("0 6 0 0 0 3 0 0 0");
@@ -67,7 +67,7 @@ namespace SudokuLibraryTest.Services
         }
 
         [Fact]
-        public void PopulatePossibilities_NotAnEasyPuzzlw()
+        public void Solve_NotAnEasyPuzzlw()
         {
             var sb = new StringBuilder();
             sb.AppendLine("0 0 0 0 0 6 0 8 0");
