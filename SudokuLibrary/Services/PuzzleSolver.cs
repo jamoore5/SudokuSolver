@@ -41,22 +41,21 @@ namespace SudokuLibrary.Services
 
             foreach(var value in PossibleValues(puzzle, rowIdx, colIdx))
             {
-                if (PlaceNumber(puzzle, value, rowIdx, colIdx))
-                {
-                    if (index == (int) Math.Pow(puzzle.Size, 2)-1)
-                    {
-                        finalPuzzle = puzzle;
-                        if (puzzle.Solved) return true;
-                    }
-                    else
-                    {
-                        var newPuzzle = new Puzzle(puzzle);
-                        if (Solve(out finalPuzzle, newPuzzle, index+1))
-                        {
-                            return true;
-                        }
+                if (!PlaceNumber(puzzle, value, rowIdx, colIdx)) continue;
 
+                if (IsDone(puzzle, rowIdx, colIdx))
+                {
+                    finalPuzzle = puzzle;
+                    if (puzzle.Solved) return true;
+                }
+                else
+                {
+                    var newPuzzle = new Puzzle(puzzle);
+                    if (Solve(out finalPuzzle, newPuzzle, index+1))
+                    {
+                        return true;
                     }
+
                 }
             }
 
@@ -69,9 +68,9 @@ namespace SudokuLibrary.Services
             return (puzzle.GetNumber(rowIdx, colIdx) != 0);
         }
 
-        private bool IsDone(int rowIdx, int colIdx)
+        private static bool IsDone(Puzzle puzzle, int rowIdx, int colIdx)
         {
-            return (rowIdx == _puzzle.Size-1 && colIdx == _puzzle.Size-1);
+            return (rowIdx == puzzle.Size-1 && colIdx == puzzle.Size-1);
         }
 
         private static IEnumerable<int> PossibleValues(Puzzle puzzle, int rowIdx, int colIdx)
@@ -82,9 +81,5 @@ namespace SudokuLibrary.Services
             set.RemoveWhere(x => puzzle.GetSquare(puzzle.GetSquareIndex(rowIdx, colIdx)).Contains(x));
             return set.ToList();
         }
-
-
-
-
     }
 }

@@ -130,6 +130,7 @@ namespace SudokuLibraryTest.Services
             Assert.True(result);
         }
 
+        // Still takes too long to solve
         // [Fact]
         // public void Solve_Test6()
         // {
