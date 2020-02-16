@@ -22,13 +22,23 @@ namespace SudokuLibrary.Services
             _numberOfZeros = 0;
             _hasRan = false;
         }
-        
+
+        public bool ValidMove(int value, int rowIdx, int colIdx)
+        {
+            _puzzle.SetNumber(value,rowIdx, colIdx);
+            var valid = !InvalidRow(_puzzle.GetRow(rowIdx)) &&
+                        !InvalidColumn(_puzzle.GetColumn(colIdx)) &&
+                        !InvalidSquare(_puzzle.GetSquare(_puzzle.GetSquareIndex(rowIdx, colIdx)));
+            _puzzle.SetNumber(0,rowIdx, colIdx);
+            return valid;
+        }
+
         private bool IsValid()
         {
             if (_hasRan) return _valid;
-            
+
             _valid = true;
-            
+
             foreach (var idx in Enumerable.Range(0, _puzzle.Size))
             {
                 if (InvalidRow(_puzzle.GetRow(idx)) || InvalidColumn(_puzzle.GetColumn(idx)) ||
@@ -52,12 +62,12 @@ namespace SudokuLibrary.Services
         {
             return InvalidElement(row);
         }
-        
+
         private bool InvalidColumn(IEnumerable<int> column)
         {
             return InvalidElement(column);
         }
-        
+
         private bool InvalidSquare(IEnumerable<int> square)
         {
             return InvalidElement(square);
@@ -69,7 +79,7 @@ namespace SudokuLibrary.Services
             _numberOfZeros += element.RemoveAll(Zero);
             return element.Distinct().Count() != element.Count();
         }
-        
+
         private static bool Zero(int num)
         {
             return num == 0;
