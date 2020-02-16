@@ -7,7 +7,7 @@ namespace SudokuLibrary.Data
 {
     public class Puzzle
     {
-        private readonly int[,] _puzzle;
+        private int[,] _puzzle;
 
         public int Size { get; }
         public bool Solved { get; private set; }
@@ -19,6 +19,19 @@ namespace SudokuLibrary.Data
             Solved = false;
             Valid = true;
             _puzzle = new int[Size,Size];
+        }
+
+        public Puzzle(Puzzle puzzle)
+        {
+            Size = puzzle.Size;
+            Solved = puzzle.Solved;
+            Valid = puzzle.Valid;
+            _puzzle = (int[,]) puzzle._puzzle.Clone();
+        }
+
+        public void UpdatePuzzle(Puzzle puzzle)
+        {
+            _puzzle = puzzle._puzzle;
         }
 
         public void SetNumber(int value, int rowIdx, int colIdx)
